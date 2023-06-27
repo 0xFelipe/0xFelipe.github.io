@@ -1,0 +1,13 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+#server-status {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 24px;
+}
