@@ -1,15 +1,13 @@
-document.addEventListener('DOMContentLoaded', getStatus);
+fetch('https://casa98.ddns.net:3000/status')
+        .then(response => response.json())
+        .then(data => {
+          const statusElement = document.getElementById('status');
+          const uptimeElement = document.getElementById('uptime');
 
-function getStatus() {
-  fetch('https://casa98.ddns.net:3000/status')
-    .then(response => response.json())
-    .then(data => {
-      const statusElement = document.getElementById('status');
-      statusElement.textContent = `Status do servidor: ${data.status}`;
-      const uptimeElement = document.getElementById('uptime');
-      uptimeElement.textContent = `Tempo de atividade: ${data.uptime} segundos`;
-    })
-    .catch(error => {
-      console.error('Erro ao obter o status do servidor:', error);
-    });
-}
+          statusElement.textContent = 'Status: ' + data.status;
+          uptimeElement.textContent = 'Uptime: ' + data.uptime;
+          statusElement.style.color = data.status === 'Online' ? 'green' : 'red';
+        })
+        .catch(error => {
+          console.error('Ocorreu um erro ao obter o status do servidor:', error);
+        });
