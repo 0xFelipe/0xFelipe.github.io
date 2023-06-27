@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Aqui você pode usar XMLHttpRequest, fetch ou qualquer outra biblioteca que preferir
     
     // Exemplo usando fetch:
-    fetch("url_do_seu_endpoint_de_status")
+    fetch("http://casa98.ddns.net:3000/")
       .then(function(response) {
         if (response.ok) {
           return response.json();
