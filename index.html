@@ -2,13 +2,61 @@
 <html>
 <head>
   <title>Status do Servidor</title>
-  <link rel="stylesheet" type="text/css" href="styles.css">
-  </head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-top: 0;
+    }
+
+    .status {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .uptime {
+      font-size: 16px;
+      color: #666;
+    }
+  </style>
+</head>
 <body>
   <div class="container">
     <h1>Status do Servidor</h1>
     <div id="status" class="status">Carregando status...</div>
     <div id="uptime" class="uptime"></div>
-	<script src="script.js"></script>
-	</body>
+
+    <script>
+      fetch('https://casa98.ddns.net:3000/status')
+        .then(response => response.json())
+        .then(data => {
+          const statusElement = document.getElementById('status');
+          const uptimeElement = document.getElementById('uptime');
+
+          statusElement.textContent = 'Status: ' + data.status;
+          uptimeElement.textContent = 'Uptime: ' + data.uptime;
+          statusElement.style.color = data.status === 'Online' ? 'green' : 'red';
+        })
+        .catch(error => {
+          console.error('Ocorreu um erro ao obter o status do servidor:', error);
+        });
+    </script>
+  </div>
+</body>
 </html>
