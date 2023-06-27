@@ -1,32 +1,15 @@
-document.addEventListener("DOMContentLoaded", function() {
-  var serverStatusElement = document.getElementById("server-status");
-  
-  // Função para buscar o status do servidor
-  function getServerStatus() {
-    // Fazer uma requisição para o servidor para obter o status
-    // Aqui você pode usar XMLHttpRequest, fetch ou qualquer outra biblioteca que preferir
-    
-    // Exemplo usando fetch:
-    fetch("http://casa98.ddns.net:3000/status")
-      .then(function(response) {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Erro ao obter o status do servidor");
-        }
-      })
-      .then(function(data) {
-        // Exibir o status do servidor no elemento "server-status"
-        serverStatusElement.textContent = "Status: " + data.status;
-      })
-      .catch(function(error) {
-        serverStatusElement.textContent = "Erro ao obter o status do servidor: " + error.message;
-      });
-  }
-  
-  // Chamar a função para obter o status do servidor inicialmente
-  getServerStatus();
-  
-  // Atualizar o status do servidor a cada x segundos (por exemplo, a cada 10 segundos)
-  setInterval(getServerStatus, 10000);
-});
+document.addEventListener('DOMContentLoaded', getStatus);
+
+function getStatus() {
+  fetch('http://casa98.ddns.net:3000/status')
+    .then(response => response.json())
+    .then(data => {
+      const statusElement = document.getElementById('status');
+      statusElement.textContent = `Status do servidor: ${data.status}`;
+      const uptimeElement = document.getElementById('uptime');
+      uptimeElement.textContent = `Tempo de atividade: ${data.uptime} segundos`;
+    })
+    .catch(error => {
+      console.error('Erro ao obter o status do servidor:', error);
+    });
+}
