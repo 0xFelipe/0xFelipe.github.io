@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', getStatus);
 
 function getStatus() {
-  fetch('http://casa98.ddns.net:3000/status')
+  fetch('https://casa98.ddns.net:3000/status')
     .then(response => response.json())
     .then(data => {
       const statusElement = document.getElementById('status');
